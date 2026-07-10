@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby Swings 婴儿秋千类目市场调研报告 | US站</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{
+    --primary:#2f6fed; --primary-dark:#1d4fb8; --accent:#ff8a5b; --bg:#f5f7fb;
+    --card:#ffffff; --text:#1f2937; --muted:#6b7280; --border:#e5e7eb;
+    --good:#16a34a; --warn:#d97706; --bad:#dc2626;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px 60px;}
+  header.hero{max-width:1200px;margin:26px auto 0;background:linear-gradient(115deg,#0f2038 0%,#1d4fb8 58%,#3a7bf2 100%);color:#fff;border-radius:18px;padding:30px 36px 34px;box-shadow:0 12px 32px rgba(15,32,56,.28);}
+  header.hero .brand-row{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  header.hero .brand-logo{width:56px;height:56px;flex:none;display:flex;align-items:center;justify-content:center;}
+  header.hero .brand-logo img{width:100%;height:100%;object-fit:contain;display:block;}
+  header.hero .brand-name{font-size:19px;font-weight:700;letter-spacing:.3px;}
+  header.hero .brand-sub{font-size:12.5px;opacity:.82;margin-top:2px;}
+  header.hero h1{font-size:28px;margin:0 0 12px;letter-spacing:.3px;font-weight:700;}
+  header.hero .meta-line{font-size:13.5px;opacity:.88;}
+  header.hero .meta-line b{opacity:1;font-weight:600;}
+  .kpi-row{max-width:1200px;margin:24px auto 30px;padding:0 24px;display:grid;grid-template-columns:repeat(6,1fr);gap:16px;}
+  @media screen and (max-width:960px){.kpi-row{grid-template-columns:repeat(3,1fr);}}
+  @media screen and (max-width:560px){.kpi-row{grid-template-columns:repeat(2,1fr);}}
+  .kpi{background:var(--card);border-radius:14px;box-shadow:0 6px 20px rgba(20,30,60,.08);padding:18px 20px;text-align:center;border-top:4px solid var(--primary);}
+  .kpi .num{font-size:24px;font-weight:700;color:var(--primary-dark);}
+  .kpi .lbl{font-size:12.5px;color:var(--muted);margin-top:4px;}
+  section{margin:44px 0;}
+  .section-title{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+  .section-title .idx{background:var(--primary);color:#fff;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none;}
+  .section-title h2{font-size:20px;margin:0;}
+  .card{background:var(--card);border-radius:14px;box-shadow:0 4px 16px rgba(20,30,60,.06);padding:24px;border:1px solid var(--border);}
+  .grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media screen and (max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr;}}
+  .chart-box{position:relative;height:280px;}
+  .chart-box.tall{height:320px;}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--border);text-align:left;vertical-align:middle;}
+  th{background:#eef3ff;color:var(--primary-dark);font-weight:600;position:sticky;top:0;}
+  tr:hover td{background:#fafbff;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11.5px;font-weight:600;}
+  .badge.good{background:#e8f8ee;color:var(--good);}
+  .badge.warn{background:#fff4e5;color:var(--warn);}
+  .badge.bad{background:#fdeaea;color:var(--bad);}
+  .prod-img{width:56px;height:56px;object-fit:contain;border-radius:8px;border:1px solid var(--border);background:#fff;}
+  .rank{font-weight:700;color:var(--primary-dark);}
+  .muted{color:var(--muted);}
+  .insight-box{background:#f0f5ff;border-left:4px solid var(--primary);border-radius:8px;padding:16px 18px;margin-top:16px;font-size:14px;}
+  .insight-box b{color:var(--primary-dark);}
+  .flex-tags span{display:inline-block;background:#eef3ff;color:var(--primary-dark);border-radius:14px;padding:3px 10px;font-size:12px;margin:3px 4px 0 0;}
+  .flex-tags span.pain{background:#fdeaea;color:var(--bad);}
+  .two-col-list{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media screen and (max-width:860px){.two-col-list{grid-template-columns:1fr;}}
+  .two-col-list h4{margin:0 0 8px;font-size:15px;}
+  .two-col-list ol{margin:0;padding-left:20px;font-size:13.5px;}
+  .two-col-list li{margin-bottom:8px;}
+  .table-scroll{overflow-x:auto;}
+  tr.trend-row td{background:#f8fafc;padding:6px 14px 10px;border-top:none;}
+  .trend-wrap{display:flex;align-items:center;gap:10px;font-size:11.5px;color:#64748b;}
+  .trend-label{flex:none;font-weight:600;color:#475569;white-space:nowrap;}
+  .trend-spark{flex:none;display:block;}
+  .trend-range{flex:none;margin-left:auto;color:#94a3b8;white-space:nowrap;}
+  .trend-empty{font-size:11.5px;color:#94a3b8;font-style:italic;}
+  .brand-bar{height:10px;border-radius:6px;background:#eef1f7;overflow:hidden;}
+  .brand-bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));}
+  footer{text-align:center;color:var(--muted);font-size:12.5px;padding:30px 0 10px;}
+  .note{font-size:12px;color:var(--muted);margin-top:10px;}
+  .small-title{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--primary-dark);}
+
+  /* Interactive profit calculator */
+  .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:6px;}
+  @media screen and (max-width:860px){.calc-grid{grid-template-columns:1fr;}}
+  .calc-grid h4{margin:0 0 8px;font-size:13.5px;color:var(--primary-dark);border-bottom:1px dashed var(--border);padding-bottom:6px;}
+  .calc-grid h4:not(:first-child){margin-top:16px;}
+  .calc-field{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px;font-size:13px;}
+  .calc-field span{color:var(--text);flex:1;}
+  .calc-field input{width:110px;padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:13px;text-align:right;font-family:inherit;}
+  .calc-field input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 2px rgba(47,111,237,.15);}
+  .calc-field .unit{color:var(--muted);font-size:11.5px;width:26px;flex:none;}
+  .calc-reset{display:inline-block;margin-top:4px;padding:6px 14px;font-size:12.5px;border-radius:8px;border:1px solid var(--primary);color:var(--primary);background:#fff;cursor:pointer;}
+  .calc-reset:hover{background:#eef3ff;}
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0 10px;}
+  .stat-box{background:#f7f9fd;border:1px solid var(--border);border-radius:10px;padding:12px 14px;text-align:center;}
+  .stat-box .v{font-size:19px;font-weight:700;color:var(--primary-dark);}
+  .stat-box .v.neg{color:var(--bad);}
+  .stat-box .l{font-size:11.5px;color:var(--muted);margin-top:3px;}
+  .calc-flex{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;}
+  .calc-flex>div:first-child{flex:1 1 260px;min-width:240px;}
+
+  /* Product selling-point / pain-point cards */
+  .prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px;}
+  @media screen and (max-width:900px){.prod-grid{grid-template-columns:1fr;}}
+  .prod-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:0 4px 14px rgba(20,30,60,.05);}
+  .prod-card .prod-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px;}
+  .prod-card .prod-head img{width:64px;height:64px;object-fit:contain;border-radius:10px;border:1px solid var(--border);background:#fff;flex:none;}
+  .prod-card .prod-head h5{margin:0 0 3px;font-size:14.5px;}
+  .prod-card .prod-head .meta{font-size:12px;color:var(--muted);}
+  .prod-card .prod-head .meta a{color:var(--primary);text-decoration:none;}
+  .sp-tags span{display:inline-block;background:#eef8f0;color:var(--good);border-radius:12px;padding:2px 9px;font-size:11.5px;margin:2px 4px 2px 0;}
+  .review-quote{margin-top:10px;background:#fbfbfc;border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:12.5px;}
+  .review-quote .rq-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;}
+  .review-quote .stars{color:#f5a623;letter-spacing:1px;font-size:12px;}
+  .review-quote .vbadge{background:#fff4e5;color:#b45309;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:6px;}
+  .review-quote .unverified{background:#f1f2f4;color:var(--muted);font-size:10.5px;font-weight:600;padding:1px 6px;border-radius:6px;}
+  .review-quote .rq-author{font-weight:700;color:var(--text);font-size:12.5px;}
+  .review-quote .rq-date{color:var(--muted);font-size:11px;margin-left:auto;}
+  .review-quote .rq-title{font-weight:700;margin:2px 0 3px;color:var(--text);}
+  .review-quote .rq-text{color:#374151;line-height:1.55;}
+  .review-quote.empty{color:var(--muted);font-style:italic;background:#f7f8fa;}
+  .review-quote .rq-label{display:inline-block;font-size:11px;color:var(--bad);font-weight:700;margin-bottom:4px;}
+
+  /* ============ 打印/另存为PDF专用样式 ============
+     浏览器打印时页面宽度(A4≈794px / Letter≈816px)会小于上面的860/900px响应式断点，
+     导致两栏布局被误判为"手机屏幕"而被上面的 @media screen 规则强制变成单栏，
+     这就是"打印PDF后排版跟网页不一样"的根本原因。
+     下面用 @media print 把关键布局强制锁回桌面版效果，并保留背景色/渐变、控制分页。 */
+  @media print{
+    *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; color-adjust:exact !important; }
+    @page{ size:A4; margin:12mm 10mm; }
+    body{ background:#fff; }
+    .wrap{ max-width:100%; padding:0 4mm 10mm; }
+    .kpi-row{ max-width:100%; padding:0 4mm; margin-top:16px; }
+    header.hero{ margin:4mm auto 0; padding:22px 24px 26px; border-radius:12px; }
+    header.hero h1{ font-size:21px; }
+    header.hero .brand-logo{ width:44px; height:44px; }
+    /* 强制保持桌面多栏布局，不随打印页宽收窄成单栏 */
+    .grid-2{ grid-template-columns:1.1fr .9fr !important; }
+    .grid-3{ grid-template-columns:repeat(3,1fr) !important; }
+    .two-col-list{ grid-template-columns:1fr 1fr !important; }
+    .prod-grid{ grid-template-columns:repeat(2,1fr) !important; }
+    /* 只对"原子级"小组件禁止拆分，大容器(section/.card/长表格/20+卡片网格)允许跨页断开——
+       此前对整个 section/.card 设置 break-inside:avoid，导致 Top50表格、20张卖点卡片等
+       较高的整块内容一旦在当前页放不下，就会被整体推到下一页，在上一页留下大片空白，
+       这正是"打印/另存PDF后出现很多空白"的根因。改为只锁定小尺寸元素，大容器允许自然分页。 */
+    section{ margin:18px 0; }
+    .card,.prod-card{ box-shadow:none; }
+    .kpi,.stat-box,.chart-box,.prod-card,.insight-box{ break-inside:avoid; page-break-inside:avoid; }
+    table{ break-inside:auto; }
+    tr{ break-inside:avoid; page-break-inside:avoid; }
+    thead{ display:table-header-group; } /* 表格跨页时表头自动在每页重复，避免第二页开始看不到列名 */
+    tfoot{ display:table-footer-group; }
+    .section-title{ break-after:avoid; page-break-after:avoid; }
+    th{ position:static; } /* sticky 表头在打印分页时会重复错位，改为静态，交给 thead 的 table-header-group 处理跨页重复 */
+    a{ color:inherit; text-decoration:none; }
+    /* 利润测算器：打印/PDF时把输入框变成纯文字快照，隐藏"重置"按钮和本地保存提示（这些在纸上没有意义） */
+    .calc-field input{ border:none; background:transparent; -webkit-appearance:none; appearance:none;
+      font-weight:700; color:var(--primary-dark); font-family:inherit; padding:0; text-align:right; }
+    .calc-reset, #pcSaveStatus{ display:none !important; }
+    .calc-flex{ break-inside:avoid; page-break-inside:avoid; }
+    .pdf-snapshot-note{ display:block !important; }
+  }
+  .pdf-snapshot-note{ display:none; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="brand-row">
+    <div class="brand-logo">
+      <img src="data:image/png;base64,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" alt="ZT Group logo" />
+    </div>
+    <div>
+      <div class="brand-name">ZT Group · Global Marketing Center</div>
+      <div class="brand-sub">中童集团 · 全球营销中心 · 市场调研</div>
+    </div>
+  </div>
+  <h1>美国站婴儿秋千(Baby Swings)类目深度分析看板</h1>
+  <div class="meta-line">Amazon US · Baby Products &gt; Activity &amp; Entertainment &gt; Bouncers, Jumpers &amp; Swings &gt; Swings · 节点 166853011 | 样本 销量Top100(类目全站在架约 508 SKU) | 数据:卖家精灵 SellerSprite，2026-07-10</div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi"><div class="num">91,518</div><div class="lbl">样本月销量（件/月）</div></div>
+  <div class="kpi"><div class="num">$971万</div><div class="lbl">样本月销售额（美元/月）</div></div>
+  <div class="kpi"><div class="num">$99.81</div><div class="lbl">样本平均单价</div></div>
+  <div class="kpi"><div class="num">508</div><div class="lbl">类目在架商品总数</div></div>
+  <div class="kpi"><div class="num">63</div><div class="lbl">样本内品牌数</div></div>
+  <div class="kpi"><div class="num">4.4★</div><div class="lbl">样本平均评分</div></div>
+</div>
+
+<div class="wrap">
+
+  <!-- 1. 市场概况与规模 -->
+  <section>
+    <div class="section-title"><div class="idx">1</div><h2>市场概况与规模</h2></div>
+    <div class="card">
+      <p>Swings（婴儿秋千/摇摇椅）是亚马逊美国 <b>Baby Products → Activity &amp; Entertainment → Bouncers, Jumpers &amp; Swings</b> 下的四级细分类目，节点编号 <code>166853011</code>，类目全站在架商品约 <b>508个</b>。取样本内销量前 ~100 个核心 ASIN（占据类目绝大部分实际成交）统计：</p>
+      <div class="grid-3">
+        <div class="card" style="box-shadow:none;border:1px dashed var(--border);">
+          <div class="small-title">规模</div>
+          样本月销量 <b>≈91,518件</b><br>样本月销售额 <b>≈US$9,714,091</b><br>平均客单价 <b>$99.81</b>
+        </div>
+        <div class="card" style="box-shadow:none;border:1px dashed var(--border);">
+          <div class="small-title">头部集中度</div>
+          Top10商品占样本 <b>51.17%</b>销量／Top10品牌占 <b>72.11%</b>销量；卖家层面更集中——Top3卖家（含Amazon自营账号）已占 <b>64.44%</b>销量，Top10占 <b>81.84%</b>
+        </div>
+        <div class="card" style="box-shadow:none;border:1px dashed var(--border);">
+          <div class="small-title">新品表现</div>
+          近6个月新品占比 <b>10%</b>（10款），平均月销 <b>325件</b>，平均月销售额 <b>$35,256</b>，平均评分 4.4；近12个月新品占比达 <b>26%</b>
+        </div>
+      </div>
+      <div class="insight-box">
+        <b>结论：</b>Swings 是一个<b>规模适中、客单价明显高于多数母婴类目（近$100）、且被"渠道型头部"深度把控</b>的细分市场——从卖家维度看，"Amazon"这一自营/品牌旗舰账号单一渠道即吃下样本 <b>60.85%</b> 的销量与 <b>59.45%</b> 的销售额（覆盖Graco、Ingenuity、Little Tikes等多个头部品牌的官方直营listing）；品牌维度Top1的 Graco 一家独占 <b>41.72%</b> 的销售额份额。但值得注意的是，卖家中有 <b>54%</b> 来自中国、FBA占比达 <b>65%</b>，说明尽管头部集中，第三方中国卖家仍是数量上的绝对主力，且近6-12个月已有 Momcozy、Monamii、RIVIPLOU、GROWNSY 等多个新兴品牌以 Bluetooth音乐、双模式摇摆、App智能控制等新功能点成功挤进销量前列。整体判断：<b>入局门槛中等偏高（头部渠道+品牌壁垒明显），但产品功能迭代快、"电动智能秋千"细分仍有真实新品突围案例</b>。
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Google 趋势 -->
+  <section>
+    <div class="section-title"><div class="idx">2</div><h2>Google 搜索趋势分析（站外，"baby swing"，近5年）</h2></div>
+    <div class="card">
+      <div class="chart-box tall"><canvas id="trendChart"></canvas></div>
+      <div class="insight-box">
+        <b>结论：</b>"baby swing" 的 Google 搜索热度指数近5年整体在 38～53 区间窄幅波动，长期趋势<b>基本走平、无明显增长</b>，属于稳定的常青刚需词而非上升期赛道；2026年3-4月出现单月异常峰值（93/77），随后回落至38的近5年低点，波动明显偏离历史区间，可能与短期促销节点或热点事件相关，不宜作为长期需求判断依据。整体判断：站外自然搜索需求<b>稳定但未见增量红利</b>，新入局者更应依赖站内广告与差异化功能点驱动增长，而非期待站外流量红利。
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 价格区间分布 -->
+  <section>
+    <div class="section-title"><div class="idx">3</div><h2>价格区间分布</h2></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="chart-box"><canvas id="priceChart"></canvas></div>
+      </div>
+      <div class="card">
+        <table>
+          <thead><tr><th>价格区间</th><th>商品数</th><th>销量占比</th></tr></thead>
+          <tbody>
+            <tr><td>$0–25</td><td>9</td><td>4.14%</td></tr>
+            <tr><td>$25–50</td><td>14</td><td>20.54%</td></tr>
+            <tr><td>$50–75</td><td>15</td><td>5.59%</td></tr>
+            <tr><td>$75–100</td><td>24</td><td>15.68%</td></tr>
+            <tr><td>$100–125</td><td>10</td><td>14.03%</td></tr>
+            <tr><td><b>$125–150</b></td><td>10</td><td><b>25.94%</b></td></tr>
+            <tr><td>$150–175</td><td>3</td><td>0.55%</td></tr>
+            <tr><td>$175以上</td><td>15</td><td>13.52%</td></tr>
+          </tbody>
+        </table>
+        <p class="note">$125–150 区间虽仅10款商品，却贡献了近26%的销量，是本类目的"效率最高"价格带（含 Graco Simple Sway、Monamii 等头部单品）。</p>
+      </div>
+    </div>
+    <div class="insight-box">
+      <b>结论：</b>Swings 的价格分布明显"哑铃化"——$25–50 走量款（14款、20.5%销量）与 $125–150 中高端款（10款、25.9%销量）是两大真实成交带，中间的 $50–75 区间虽有15款商品在售，销量占比却只有5.59%，是当前"叫好不叫座"的拥挤区间；$150–175 更是商品数少（3款）、销量占比垫底（0.55%），说明<b>过窄的高价细分（$150-175）目前尚未被市场验证</b>，新进入者若走高价路线建议直接对标$125-150或$175+两个已验证的价格锚点，避免落入$50-75或$150-175这两个效率洼地。
+    </div>
+  </section>
+
+  <!-- 4. 评分与评论数分布 -->
+  <section>
+    <div class="section-title"><div class="idx">4</div><h2>评分 &amp; 评论数分布（市场成熟度与新品门槛）</h2></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="small-title">评分值分布</div>
+        <div class="chart-box"><canvas id="ratingChart"></canvas></div>
+        <p class="note">4.3分以上商品合计贡献 <b>87.79%</b> 的销量，低于4.0分的商品销量占比合计仅 <b>2.03%</b>——消费者对评分同样非常敏感。</p>
+      </div>
+      <div class="card">
+        <div class="small-title">评论数分布</div>
+        <div class="chart-box"><canvas id="ratingsCountChart"></canvas></div>
+        <p class="note">评论数500+的35款商品占据 <b>67.08%</b> 的销量；评论数低于100的27款商品合计销量占比仅 <b>7.55%</b>。</p>
+      </div>
+    </div>
+    <div class="insight-box">
+      <b>结论：</b>相比很多母婴子类目，Swings 的"评论护城河"依然存在但相对没有那么极端——500+评论商品占约67%销量（而非80%+），说明仍有约1/3的销量流向评论积累未满500条的中生代/新锐商品，为新品留出了实际突围空间；但100条以下评论的商品销量占比仍不足8%，<b>0-100条这道"冷启动门槛"依然是新品最难跨越的阶段</b>，新入局者需重点规划Vine测评、站外种草等手段尽快积累前100条评论。
+    </div>
+  </section>
+
+  <!-- 5. 上架时间分布 -->
+  <section>
+    <div class="section-title"><div class="idx">5</div><h2>上架时间分布（新老品竞争格局）</h2></div>
+    <div class="card">
+      <div class="chart-box"><canvas id="listingDateChart"></canvas></div>
+      <div class="insight-box">
+        <b>结论：</b>上架3年以上的33款"老品"仍贡献 <b>52.03%</b> 的销量，叠加2年半档共 <b>65.6%</b>，市场仍由 Graco、Ingenuity、Little Tikes、Swurfer、Bright Starts 等老牌把控；但上架1年半以内的45款商品已合计拿下约 <b>16.98%</b> 的销量份额，其中近6个月上架的10款新品即占 <b>1.35%+2.14%=3.5%</b>，Momcozy、Monamii、GROWNSY、TinyGlow、TimChic 等品牌均以电动智能功能（Bluetooth音乐/App控制/哭声感应）在1-2年内快速起量 —— 证明<b>新品仍有实际突围空间，但需要靠"功能升级"而非单纯低价切入</b>。
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 品牌集中度与市场份额 -->
+  <section>
+    <div class="section-title"><div class="idx">6</div><h2>品牌集中度与市场份额</h2></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="chart-box tall"><canvas id="brandChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="table-scroll">
+        <table>
+          <thead><tr><th>排名</th><th>品牌</th><th>SKU数</th><th>均价</th><th>评分</th><th>销量占比</th><th>销售额占比</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><b>Graco</b></td><td>8</td><td>$192.64</td><td>4.5</td><td>29.80%</td><td><b>41.72%</b></td></tr>
+            <tr><td>2</td><td><b>Momcozy</b></td><td>4</td><td>$125.49</td><td>4.3</td><td>10.58%</td><td>14.10%</td></tr>
+            <tr><td>3</td><td>Swurfer</td><td>3</td><td>$68.32</td><td>4.8</td><td>9.93%</td><td>3.78%</td></tr>
+            <tr><td>4</td><td>Ingenuity</td><td>6</td><td>$96.82</td><td>4.3</td><td>9.20%</td><td>8.82%</td></tr>
+            <tr><td>5</td><td>Monamii</td><td>1</td><td>$139.99</td><td>4.6</td><td>8.86%</td><td>11.31%</td></tr>
+            <tr><td>6</td><td>RIVIPLOU</td><td>3</td><td>$69.99</td><td>4.3</td><td>8.24%</td><td>5.69%</td></tr>
+            <tr><td>7</td><td>Bright Starts</td><td>2</td><td>$74.89</td><td>4.5</td><td>8.20%</td><td>3.86%</td></tr>
+            <tr><td>8</td><td>Little Tikes</td><td>1</td><td>$26.99</td><td>4.8</td><td>6.29%</td><td>1.55%</td></tr>
+            <tr><td>9</td><td>FasonBaby</td><td>2</td><td>$124.99</td><td>4.5</td><td>5.33%</td><td>6.22%</td></tr>
+            <tr><td>10</td><td>Uuoeebb</td><td>3</td><td>$89.98</td><td>4.4</td><td>3.58%</td><td>2.94%</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="note">占比均为该品牌销量/销售额占样本总量（91,518件 / $9,714,091）的比例。Top10品牌合计覆盖样本 <b>约93.6%</b> 的销量、约<b>100%</b>（因四舍五入)的销售额占比数据取自SellerSprite品牌集中度接口原始返回；Top3品牌（Graco / Momcozy / Swurfer）合计占样本 <b>59.6%</b>的销售额，Graco 一家独占超4成销售额，是本类目最明显的头部垄断品牌。</p>
+      </div>
+    </div>
+    <div class="insight-box">
+      <b>结论：</b>Swings 品牌集中度呈"一超多强"结构——Graco 凭借 Slim Spaces、Simple Sway 等多款经典机型独占样本 <b>41.72%</b> 的销售额，是本类目绝对头部；紧随其后的 Momcozy、Monamii 均以"蓝牙音乐+多档速度"电动秋千切入中高价位（$125-$140），在上架仅1-2年内即跻身品牌销量Top5，说明<b>"智能化功能+适中价位"是目前最有效的追赶头部路径</b>；Swurfer 则代表了另一条差异化路线——户外可挂式秋千+低价（$68），凭借4.8的高评分和3款SKU拿到近10%的销量份额，证明细分场景(户外/游乐场秋千)仍可在不与Graco正面竞价的情况下建立份额。11-63名的53个长尾品牌合计仅瓜分剩余约6.4%的销量，说明进入品牌Top10后成长空间才真正打开。
+    </div>
+  </section>
+
+  <!-- 7. 卖家集中度 -->
+  <section>
+    <div class="section-title"><div class="idx">7</div><h2>卖家集中度</h2></div>
+    <div class="card">
+      <table>
+        <thead><tr><th>排名</th><th>卖家</th><th>SKU数</th><th>销量占比</th><th>销售额占比</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><b>Amazon（品牌方自营/1P托管发货）</b></td><td>26</td><td>60.85%</td><td>59.45%</td></tr>
+          <tr><td>2</td><td>Momcozy Official Store</td><td>4</td><td>9.48%</td><td>12.60%</td></tr>
+          <tr><td>3</td><td>MianMianBaby</td><td>1</td><td>7.94%</td><td>10.11%</td></tr>
+          <tr><td>4</td><td>RIVIPLOU</td><td>3</td><td>7.38%</td><td>5.08%</td></tr>
+          <tr><td>5</td><td>FasonBaby</td><td>2</td><td>4.78%</td><td>5.56%</td></tr>
+          <tr><td>6</td><td>Mida-TECH</td><td>2</td><td>2.65%</td><td>2.63%</td></tr>
+          <tr><td>7</td><td>Chuanrui</td><td>1</td><td>1.91%</td><td>1.56%</td></tr>
+          <tr><td>8</td><td>FEITIONG</td><td>2</td><td>1.91%</td><td>1.47%</td></tr>
+          <tr><td>9</td><td>szwm</td><td>2</td><td>1.64%</td><td>1.38%</td></tr>
+          <tr><td>10</td><td>Yeaoi_Service</td><td>1</td><td>1.47%</td><td>0.16%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">整体口径：类目内Amazon自营/托管listing占比约27%（按SKU数），FBA第三方占65%，FBM占4%（其余约4%为其他/混合配送方式）。</p>
+      <div class="insight-box">
+        <b>结论：</b>与"品牌集中度"呈现的头部垄断相互印证——超6成销量、近6成销售额都通过"Amazon"这一自营/品牌托管发货账号完成（对应Graco、Ingenuity、Little Tikes等传统品牌的官方直营listing）；第二梯队的 Momcozy、MianMianBaby(Monamii)、RIVIPLOU、FasonBaby 均为近1-2年内快速起量的中国卖家自运营品牌，合计已拿下约24%的销量，是当前增长最快的供给力量。整体卖家国籍中 <b>54%来自中国</b>，说明尽管头部由传统品牌把控渠道，供给端仍高度依赖中国跨境卖家/工厂。
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Top50 产品数据 -->
+  <section>
+    <div class="section-title"><div class="idx">8</div><h2>Top 50 产品数据（按月销量排序）</h2></div>
+    <div class="card table-scroll">
+      <table id="top20table">
+        <thead>
+          <tr>
+            <th>#</th><th>图片</th><th>ASIN</th><th>品牌</th><th>月销量</th><th>月销售额</th><th>价格</th><th>评分数</th><th>评分</th><th>上架日期</th><th>上架天数</th>
+          </tr>
+        </thead>
+        <tbody id="top20body"></tbody>
+      </table>
+      <p class="note">数据取自 SellerSprite 2026年6月类目样本（类目全站在架约508个SKU，此处按月销量取前50）；"上架天数"以报告日期 2026-07-10 计算；本次未采集逐月销量趋势数据，暂不展示子行sparkline。</p>
+    </div>
+  </section>
+
+  <!-- 9. 新品榜 Top20 -->
+  <section>
+    <div class="section-title"><div class="idx">9</div><h2>新品榜 Top 20（近6个月内上架，按月销量排序）</h2></div>
+    <div class="card table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th><th>图片</th><th>ASIN</th><th>品牌</th><th>月销量</th><th>月销售额</th><th>价格</th><th>评分数</th><th>评分</th><th>上架日期</th><th>上架天数</th>
+          </tr>
+        </thead>
+        <tbody id="newProdBody"></tbody>
+      </table>
+      <p class="note">"新品"定义：报告日期(2026-07-10)前6个月内上架的ASIN；按去重后的独立ASIN（排除同款变体重复计数）统计，样本内共32款符合条件，此处取其中月销量最高的20款（不含1款配件类"电源线"listing）；数据同取自 SellerSprite 2026年6月类目样本。</p>
+      <div class="insight-box">
+        <b>结论：</b>新品榜前20中价格带主要集中在$54–$200，以"Bluetooth音乐+多档速度+5点式安全带"为标配功能。榜首 GROWNSY(B0GK12TG28) 上架仅约80天即做到505件/月，主打"双向摇摆(侧摆+前后摆)+270°旋转座椅"这一差异化卖点；HARPPA 一个品牌就有3款新品同时上榜(第10/13/16位)，走的是"多SKU快速铺货"打法，价格带集中在$120-$200的中高端。值得关注的是 JFOVMCYG 两款几乎同款仅配色不同的新品(B0FJ7ZMX9C/B0FJ7Z6MXJ)同时挤进榜单，是本类目内典型的"一款多刊登占坑"打法。整体新品评分跨度4.2-5.0，尚未出现明显低分产品，但多数新品评论数仍在10-50条区间，与其销量相比评论沉淀明显滞后，印证本报告"机会点与细分市场"章节中"评论冷启动"仍是新进入者面临的核心挑战。
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Top20 卖点与痛点 -->
+  <section>
+    <div class="section-title"><div class="idx">10</div><h2>Top 10 产品卖点与痛点</h2></div>
+
+    <div class="card">
+      <div class="two-col-list">
+        <div>
+          <h4>✅ 高频卖点（跨品牌共性）</h4>
+          <div class="flex-tags">
+            <span>安抚哭闹/助眠效果好</span><span>解放双手做家务</span><span>轻便可折叠易携带</span>
+            <span>组装简单免工具</span><span>坐垫可拆卸机洗</span><span>多档速度/多模式摇摆</span>
+            <span>内置音乐/蓝牙播放</span><span>婴儿送礼首选</span><span>高度可调节</span>
+            <span>配色百搭融入家居</span>
+          </div>
+        </div>
+        <div>
+          <h4>⚠️ 高频痛点（跨品牌共性）</h4>
+          <div class="flex-tags">
+            <span class="pain">到货缺件/缺电源适配器</span><span class="pain">头颈支撑不足/角度偏低有安全隐患</span>
+            <span class="pain">安全带/卡扣使用后期松动断裂</span><span class="pain">电机/马达数月后故障</span>
+            <span class="pain">承重轻/宝宝稍大即坐不下</span><span class="pain">遇冷热天气材质变脆开裂</span>
+            <span class="pain">绳索/挂钩长度不可调</span><span class="pain">霉斑/发霉问题</span>
+            <span class="pain">客服响应慢/售后差</span><span class="pain">摇摆动力不足体验不足</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="note" style="margin-top:16px;">以下每张卡片对应 Top50 中月销量最高的10款商品：左侧为产品实拍图与核心卖点标签（提炼自Listing标题真实文本），右侧"真实买家评价"卡片摘录自该 ASIN 在亚马逊评论区的<b>真实原文</b>（含评论者、星级、Verified Purchase标记与评论日期，数据取自 SellerSprite 评论接口，非截图但为逐字摘录，点击 ASIN 可直达商品页核对原文）；受限于本次调研的评论抓取范围，部分ASIN暂未采集到可摘录的文字评论，已在卡片中注明。</p>
+    <div class="prod-grid" id="prodPainGrid"></div>
+  </section>
+
+  <!-- 11. 新品榜 Top20 卖点与痛点 -->
+  <section>
+    <div class="section-title"><div class="idx">11</div><h2>新品榜 Top 10 产品卖点与痛点</h2></div>
+
+    <div class="card">
+      <div class="two-col-list">
+        <div>
+          <h4>✅ 高频卖点（新品共性）</h4>
+          <div class="flex-tags">
+            <span>多档摇摆速度可调</span><span>侧摆+前后摆双模式/270°旋转</span><span>内置Bluetooth音乐/白噪音</span>
+            <span>遥控器远程操作</span><span>可拆卸玩具杆</span><span>5点式安全带</span>
+            <span>哭声感应自动安抚</span><span>木质/网面透气设计</span>
+          </div>
+        </div>
+        <div>
+          <h4>⚠️ 高频痛点（新品共性）</h4>
+          <div class="flex-tags">
+            <span class="pain">评论沉淀速度与销量明显不匹配</span><span class="pain">同品牌相似款多Listing重复铺货</span>
+            <span class="pain">拼装说明/五金件安装体验一般</span><span class="pain">部分动作模式区分度不高</span>
+            <span class="pain">座椅偏暖/透气性有待提升</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="note" style="margin-top:16px;">以下每张卡片对应新品榜 Top20 中月销量最高的10款商品：左侧为产品实拍图与核心卖点标签（提炼自 Listing 标题真实文本），右侧"真实买家评价"摘录自该 ASIN 在亚马逊评论区的<b>真实原文</b>（含评论者、星级、Verified Purchase/Vine标记与评论日期，数据取自 SellerSprite 评论接口，逐字摘录，点击 ASIN 可直达商品页核对原文）；部分新品因上架时间短、评论样本量过小，暂无可摘录的负面评论，已在卡片中注明。</p>
+    <div class="prod-grid" id="newProdPainGrid"></div>
+  </section>
+
+  <!-- 12. Top20 广告洞察 -->
+  <section>
+    <div class="section-title"><div class="idx">12</div><h2>Top 20 广告洞察（预估月度广告花费）</h2></div>
+    <div class="card">
+      <div class="stat-grid">
+        <div class="stat-box"><div class="v">$1,039,618</div><div class="l">Top20预估月度广告总投入</div></div>
+        <div class="stat-box"><div class="v">$51,981</div><div class="l">单品平均预估月广告花费</div></div>
+        <div class="stat-box"><div class="v">15%</div><div class="l">测算所用假设ACOS</div></div>
+        <div class="stat-box"><div class="v">26.0%</div><div class="l">Top3产品占Top20预估广告总投入比例</div></div>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>#</th><th>图片</th><th>ASIN</th><th>品牌</th><th>月销售额(真实)</th><th>假设ACOS</th><th>预估月广告花费</th><th>占月销售额比例</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71tWA0agF3L._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B09MWJDC6C</td><td>Graco</td><td>$739,793</td><td>15%</td><td>$110,969</td><td>15.0%</td></tr>
+            <tr><td>2</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71dQ27s4d5L._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B09BG3TCBL</td><td>Swurfer</td><td>$249,298</td><td>15%</td><td>$37,395</td><td>15.0%</td></tr>
+            <tr><td>3</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/61urNEfegVL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0D65F9NS7</td><td>Monamii</td><td>$813,202</td><td>15%</td><td>$121,980</td><td>15.0%</td></tr>
+            <tr><td>4</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/61kV0env6RL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B09MWHHV11</td><td>Graco</td><td>$733,781</td><td>15%</td><td>$110,067</td><td>15.0%</td></tr>
+            <tr><td>5</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71BjWCQgEXL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0BTDRL37K</td><td>Bright Starts</td><td>$257,663</td><td>15%</td><td>$38,649</td><td>15.0%</td></tr>
+            <tr><td>6</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/714QuB5NgUL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B01DGIKD68</td><td>Little Tikes</td><td>$111,307</td><td>15%</td><td>$16,696</td><td>15.0%</td></tr>
+            <tr><td>7</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/711olqVh-OL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B095L52T3Z</td><td>Graco</td><td>$778,886</td><td>15%</td><td>$116,833</td><td>15.0%</td></tr>
+            <tr><td>8</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/61gl0oD3OCL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0CT5K6DJG</td><td>RIVIPLOU</td><td>$276,856</td><td>15%</td><td>$41,528</td><td>15.0%</td></tr>
+            <tr><td>9</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/610qT0TAAtL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0DK5KKWKT</td><td>Momcozy</td><td>$449,681</td><td>15%</td><td>$67,452</td><td>15.0%</td></tr>
+            <tr><td>10</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/61GtwIDwrjL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0FH6Q7T6B</td><td>Momcozy</td><td>$406,772</td><td>15%</td><td>$61,016</td><td>15.0%</td></tr>
+            <tr><td>11</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71qOkZqlC6L._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0FGJ49MYP</td><td>FasonBaby</td><td>$364,622</td><td>15%</td><td>$54,693</td><td>15.0%</td></tr>
+            <tr><td>12</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/711kiQZHWEL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B07HPFTV69</td><td>Ingenuity</td><td>$202,606</td><td>15%</td><td>$30,391</td><td>15.0%</td></tr>
+            <tr><td>13</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71vWQ15VctL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0BLP58XZD</td><td>Ingenuity</td><td>$256,333</td><td>15%</td><td>$38,450</td><td>15.0%</td></tr>
+            <tr><td>14</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/718SBt73xkL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0CPTD1PS8</td><td>Maxi-Cosi</td><td>$270,731</td><td>15%</td><td>$40,610</td><td>15.0%</td></tr>
+            <tr><td>15</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71TvViRVTpL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0DQ819LTK</td><td>RIVIPLOU</td><td>$112,790</td><td>15%</td><td>$16,919</td><td>15.0%</td></tr>
+            <tr><td>16</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71FyJRlM8cL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B09YKWCPSP</td><td>Larex</td><td>$160,475</td><td>15%</td><td>$24,071</td><td>15.0%</td></tr>
+            <tr><td>17</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71PWUU+IcOL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B0DSVYTYDV</td><td>Uuoeebb</td><td>$125,432</td><td>15%</td><td>$18,815</td><td>15.0%</td></tr>
+            <tr><td>18</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71kHwX+ywpL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B08K2CN246</td><td>Graco</td><td>$253,187</td><td>15%</td><td>$37,978</td><td>15.0%</td></tr>
+            <tr><td>19</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/71eduzdhZOL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B00AO084CW</td><td>Graco</td><td>$277,607</td><td>15%</td><td>$41,641</td><td>15.0%</td></tr>
+            <tr><td>20</td><td><img class="prod-img" src="https://images-na.ssl-images-amazon.com/images/I/7121ifTGsdL._AC_US200_.jpg" loading="lazy" onerror="this.style.opacity=0.2"></td><td>B09QT8Z7LH</td><td>Ingenuity</td><td>$89,766</td><td>15%</td><td>$13,465</td><td>15.0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">卖家真实广告花费为其Amazon广告后台的私有数据，任何第三方市场调研工具（含卖家精灵）均无法获取竞品的真实广告预算。以上"预估月广告花费"＝月销售额(真实数据) × 假设ACOS(15%，与本报告"可变动利润测算器"默认值一致，取母婴类目常见经验值)，用于同口径横向比较各产品的广告投入量级，<b>不是</b>该产品的真实广告开支。</p>
+      <div class="insight-box">
+        <b>结论：</b>由于测算采用统一ACOS假设，预估广告花费的分布天然与销售额分布高度重合——Graco(B09MWJDC6C/B09MWHHV11)与Monamii(B0D65F9NS7)三款产品合计占Top20预估广告总投入的 <b>26.0%</b>，与其销售额集中度基本一致。需要注意的是，实际情况中<b>头部成熟品牌（Graco、Ingenuity）往往凭借更强的自然排名和评论基础，实际ACOS会明显低于15%</b>（广告依赖度更低），而新入局/长尾产品（如Momcozy、GROWNSY、TinyGlow等近1-2年新品牌）为了抢占初始排名，实际ACOS普遍需要拉高到20-40%甚至更高才能起量——也就是说，<b>新品牌的真实广告投入占销售额比例大概率高于本表所示的统一15%假设</b>，这也是新手起量阶段广告费是主要现金流压力项的原因。
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. 机会点与细分市场 -->
+  <section>
+    <div class="section-title"><div class="idx">13</div><h2>机会点与细分市场</h2></div>
+    <div class="card">
+      <div class="two-col-list">
+        <div>
+          <h4>🟢 机会点</h4>
+          <ol>
+            <li><b>$50–75 价格洼地</b>：15款商品在售但销量占比仅5.59%，是当前"供给过剩、成交效率最低"的区间，新品应避免盲目扎堆此价格带。</li>
+            <li><b>电动智能秋千快速崛起</b>：Momcozy、Monamii、GROWNSY、TinyGlow 等均以"Bluetooth音乐+多档速度+App/遥控"为卖点，1-2年内即打入品牌Top10，是当前增长最快的细分。</li>
+            <li><b>安全与结构可靠性升级</b>：差评中反复出现"电机故障""安全带松动""头颈支撑不足"等问题，谁能率先解决可建立信任壁垒。</li>
+            <li><b>户外/便携场景细分</b>：Swurfer 证明"低价+高评分+户外可挂式"路线可在不与Graco正面竞价的情况下拿到近10%份额，同类定位品牌仍偏少。</li>
+            <li><b>$125–150 中高端价格带</b>：仅10款商品却贡献25.94%的销量，是目前效率最高的价格锚点，适合已有一定供应链能力的品牌切入。</li>
+          </ol>
+        </div>
+        <div>
+          <h4>🔴 主要风险与挑战</h4>
+          <ol>
+            <li><b>渠道/品牌双重集中</b>："Amazon"自营托管账号占60.85%销量，Graco单品牌占41.72%销售额，正面竞争头部成本极高。</li>
+            <li><b>评论冷启动门槛</b>：评论数低于100的商品销量占比仅7.55%，新品起量前期仍需要较大的评论获取投入（Vine、赠测等）。</li>
+            <li><b>安全合规敏感</b>：秋千类产品涉及悬挂结构、电机、安全带等多个安全环节，需严格通过 ASTM F2088等安规测试，合规与召回风险不可忽视。</li>
+            <li><b>供给端高度依赖中国卖家</b>：54%卖家来自中国、65%为FBA第三方，同质化竞争与价格战风险持续存在。</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14. 成本推算与新手入局测算 -->
+  <section>
+    <div class="section-title"><div class="idx">14</div><h2>成本推算与新手入局测算</h2></div>
+
+    <div class="card">
+      <div class="small-title">可变动利润测算器（对标卖家精灵后台"利润测算"模板，参数均可自行修改，实时重新计算）</div>
+      <p class="pdf-snapshot-note note">⚠️ 以下为导出PDF时的固定数值快照（打印当下页面上填的数字），PDF中不可再编辑或重新计算；如需修改参数重新测算，请在浏览器中打开原始HTML文件。</p>
+      <div class="calc-flex">
+        <div class="calc-grid">
+          <div>
+            <h4>① 商品收入</h4>
+            <div class="calc-field"><span>单件售价</span><input type="number" id="pcPrice" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <div class="calc-field"><span>月销量</span><input type="number" id="pcUnits" step="1" placeholder="0" oninput="pcCalc()"><span class="unit">件</span></div>
+            <h4>② 产品成本</h4>
+            <div class="calc-field"><span>采购成本/件</span><input type="number" id="pcCogs" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <div class="calc-field"><span>头程运费/件</span><input type="number" id="pcFreight" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <div class="calc-field"><span>入仓/清关等其他物流/件</span><input type="number" id="pcOtherLog" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <h4>③ 关税与进口杂费</h4>
+            <div class="calc-field"><span>综合关税税率(原产国，默认中国大陆)</span><input type="number" id="pcTariffRate" step="0.1" value="35" oninput="pcCalc()"><span class="unit">%</span></div>
+            <div class="calc-field"><span>MPF+HMF等报关杂费费率</span><input type="number" id="pcImportFees" step="0.01" value="0.47" oninput="pcCalc()"><span class="unit">%</span></div>
+          </div>
+          <div>
+            <h4>④ 亚马逊平台费用</h4>
+            <div class="calc-field"><span>平台佣金率</span><input type="number" id="pcReferralRate" step="0.1" value="15" oninput="pcCalc()"><span class="unit">%</span></div>
+            <div class="calc-field"><span>最低佣金</span><input type="number" id="pcReferralMin" step="0.01" value="0.30" oninput="pcCalc()"><span class="unit">$</span></div>
+            <div class="calc-field"><span>FBA配送费/件</span><input type="number" id="pcFba" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <div class="calc-field"><span>月仓储费/件</span><input type="number" id="pcStorage" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <h4>⑤ 营销与售后成本</h4>
+            <div class="calc-field"><span>广告费占销售额比例(ACOS)</span><input type="number" id="pcAcos" step="0.1" value="15" oninput="pcCalc()"><span class="unit">%</span></div>
+            <div class="calc-field"><span>其他营销成本/件(测评/红人/Deals)</span><input type="number" id="pcOtherMkt" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+            <div class="calc-field"><span>退货率</span><input type="number" id="pcReturnRate" step="0.1" value="5" oninput="pcCalc()"><span class="unit">%</span></div>
+            <div class="calc-field"><span>退货处理手续费/件</span><input type="number" id="pcRefundFee" step="0.01" placeholder="0" oninput="pcCalc()"><span class="unit">$</span></div>
+          </div>
+        </div>
+        <div style="flex:1 1 240px;min-width:220px;">
+          <div class="chart-box" style="height:240px;"><canvas id="pcChart"></canvas></div>
+          <button class="calc-reset" onclick="pcReset()">重置为空白模板</button>
+          <div class="note" id="pcSaveStatus" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <div class="stat-grid" id="pcStats"></div>
+      <p class="note">测算口径：净利润 ＝ 总收入 － 退货冲减收入 － 平台佣金 － FBA费用 － 月仓储费 － 产品成本(含头程/其他物流) － 关税 － 报关杂费 － 广告费 － 其他营销成本 － 退货处理手续费；平台佣金＝max(售价×佣金率, 最低佣金)；<b>关税计税基础＝(采购成本+头程运费)/件</b>，关税＝计税基础×综合关税税率，报关杂费(MPF+HMF)＝计税基础×杂费费率；退货冲减收入＝总收入×退货率（简化处理，未拆分退货订单的佣金退还，实务中会有部分佣金退还给卖家）；ROI＝净利润÷产品成本总投入(含关税)。综合关税税率默认35%，对应美国对中国大陆 Baby Swings(多归入HTS 9401.80座具类或9503.00玩具类，MFN基础税率0%)在2026年当前叠加的 Section 122对等关税10% + Section 301附加关税25% 之和；MPF+HMF杂费费率默认0.47%(即约0.3464%商品处理费+0.125%港口维护费)。以上为通用测算模板，佣金率/ACOS/退货率/关税率已预填Baby Products类目及中国原产地常见经验值，具体税则、汇率及关税政策随时可能调整，请以美国海关(CBP)/HTS官方数据及专业报关行核实后的税率为准，不构成财务或法律建议。</p>
+    </div>
+  </section>
+
+  <!-- 15. 总结建议 -->
+  <section>
+    <div class="section-title"><div class="idx">15</div><h2>总结与建议</h2></div>
+    <div class="card">
+      <p>Baby Swings 是一个 <b>规模适中（月销约9.2万件/971万美元）、客单价明显高于多数母婴类目(近$100)、站外搜索需求走平但站内被"渠道+品牌"双重集中把控</b> 的母婴细分类目。Amazon自营/托管账号独占超6成销量，Graco一家品牌独占超4成销售额，正面竞争头部成本极高；但评论门槛(而非渠道垄断)才是新品真正需要跨越的壁垒——近1-2年内已有 Momcozy、Monamii、RIVIPLOU、GROWNSY 等多个新兴品牌凭借"电动智能化+功能升级"成功挤入品牌销量前列。</p>
+      <p>建议新进入者优先考虑：① 卡位 <b>$125–150 中高端价格带或差异化户外/便携场景</b>（对标Swurfer的低价高分路线），避开$50-75这一"供给过剩、成交效率最低"的红海区间；② 用<b>更扎实的电机与结构可靠性设计</b>（解决电机故障、安全带松动、头颈支撑不足等重复差评）建立信任型差异化；③ 上市初期集中资源冲刺评论数量，尽快跨越"100条评论"这一转化拐点；④ 鉴于Google站外搜索热度近5年基本走平，不宜依赖自然流量红利，应以站内广告+差异化功能点为主驱动增长。</p>
+      <p class="note">数据来源：SellerSprite MCP 站内数据（2026年6月样本）与 Google Trends；销量/销售额为基于站内算法的估算值，非卖家后台真实数据，仅供选品决策参考。</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>Baby Swings 类目调研报告 · 数据截至 2026-07-10 · 数据来源：SellerSprite / Google Trends</footer>
+
+<script>
+const top20 = [
+{r:1,img:"https://images-na.ssl-images-amazon.com/images/I/71tWA0agF3L._AC_US200_.jpg",asin:"B09MWJDC6C",brand:"Graco",units:6726,revenue:739792.75,price:109.99,ratings:3182,rating:4.6,date:"2022-02-11",days:1610},
+{r:2,img:"https://images-na.ssl-images-amazon.com/images/I/71dQ27s4d5L._AC_US200_.jpg",asin:"B09BG3TCBL",brand:"Swurfer",units:6234,revenue:249297.67,price:39.99,ratings:4720,rating:4.7,date:"2021-07-30",days:1806},
+{r:3,img:"https://images-na.ssl-images-amazon.com/images/I/61urNEfegVL._AC_US200_.jpg",asin:"B0D65F9NS7",brand:"Monamii",units:5809,revenue:813201.94,price:139.99,ratings:850,rating:4.6,date:"2024-07-03",days:737},
+{r:4,img:"https://images-na.ssl-images-amazon.com/images/I/61kV0env6RL._AC_US200_.jpg",asin:"B09MWHHV11",brand:"Graco",units:5279,revenue:733781.0,price:139.0,ratings:22371,rating:4.5,date:"2022-01-12",days:1640},
+{r:5,img:"https://images-na.ssl-images-amazon.com/images/I/71BjWCQgEXL._AC_US200_.jpg",asin:"B0BTDRL37K",brand:"Bright Starts",units:5175,revenue:257663.25,price:49.79,ratings:9142,rating:4.5,date:"2023-02-01",days:1255},
+{r:6,img:"https://images-na.ssl-images-amazon.com/images/I/714QuB5NgUL._AC_US200_.jpg",asin:"B01DGIKD68",brand:"Little Tikes",units:4124,revenue:111306.76,price:26.99,ratings:34722,rating:4.8,date:"2016-05-21",days:3702},
+{r:7,img:"https://images-na.ssl-images-amazon.com/images/I/711olqVh-OL._AC_US200_.jpg",asin:"B095L52T3Z",brand:"Graco",units:3914,revenue:778886.0,price:199.0,ratings:3423,rating:4.4,date:"2021-06-01",days:1865},
+{r:8,img:"https://images-na.ssl-images-amazon.com/images/I/61gl0oD3OCL._AC_US200_.jpg",asin:"B0CT5K6DJG",brand:"RIVIPLOU",units:3596,revenue:276856.03,price:76.99,ratings:1322,rating:4.5,date:"2024-02-04",days:887},
+{r:9,img:"https://images-na.ssl-images-amazon.com/images/I/610qT0TAAtL._AC_US200_.jpg",asin:"B0DK5KKWKT",brand:"Momcozy",units:3123,revenue:449680.78,price:143.99,ratings:345,rating:4.2,date:"2025-05-01",days:435},
+{r:10,img:"https://images-na.ssl-images-amazon.com/images/I/61GtwIDwrjL._AC_US200_.jpg",asin:"B0FH6Q7T6B",brand:"Momcozy",units:2825,revenue:406771.75,price:143.99,ratings:350,rating:4.2,date:"2025-09-05",days:308},
+{r:11,img:"https://images-na.ssl-images-amazon.com/images/I/71qOkZqlC6L._AC_US200_.jpg",asin:"B0FGJ49MYP",brand:"FasonBaby",units:2805,revenue:364621.97,price:129.99,ratings:218,rating:4.5,date:"2025-12-01",days:221},
+{r:12,img:"https://images-na.ssl-images-amazon.com/images/I/711kiQZHWEL._AC_US200_.jpg",asin:"B07HPFTV69",brand:"Ingenuity",units:2006,revenue:202606.0,price:101.0,ratings:7051,rating:4.3,date:"2019-12-06",days:2408},
+{r:13,img:"https://images-na.ssl-images-amazon.com/images/I/71vWQ15VctL._AC_US200_.jpg",asin:"B0BLP58XZD",brand:"Ingenuity",units:1709,revenue:256332.92,price:149.99,ratings:1046,rating:4.4,date:"2022-12-07",days:1311},
+{r:14,img:"https://images-na.ssl-images-amazon.com/images/I/718SBt73xkL._AC_US200_.jpg",asin:"B0CPTD1PS8",brand:"Maxi-Cosi",units:1496,revenue:270731.12,price:180.97,ratings:1405,rating:4.5,date:"2023-12-09",days:944},
+{r:15,img:"https://images-na.ssl-images-amazon.com/images/I/71TvViRVTpL._AC_US200_.jpg",asin:"B0DQ819LTK",brand:"RIVIPLOU",units:1465,revenue:112790.34,price:76.99,ratings:435,rating:4.4,date:"2025-04-11",days:455},
+{r:16,img:"https://images-na.ssl-images-amazon.com/images/I/71FyJRlM8cL._AC_US200_.jpg",asin:"B09YKWCPSP",brand:"Larex",units:1459,revenue:160475.4,price:109.99,ratings:1921,rating:4.5,date:"2025-02-11",days:514},
+{r:17,img:"https://images-na.ssl-images-amazon.com/images/I/71PWUU+IcOL._AC_US200_.jpg",asin:"B0DSVYTYDV",brand:"Uuoeebb",units:1394,revenue:125432.125,price:89.98,ratings:559,rating:4.6,date:"2025-01-18",days:538},
+{r:18,img:"https://images-na.ssl-images-amazon.com/images/I/71kHwX+ywpL._AC_US200_.jpg",asin:"B08K2CN246",brand:"Graco",units:1353,revenue:253186.89,price:187.13,ratings:2801,rating:4.7,date:"2020-12-23",days:2025},
+{r:19,img:"https://images-na.ssl-images-amazon.com/images/I/71eduzdhZOL._AC_US200_.jpg",asin:"B00AO084CW",brand:"Graco",units:1322,revenue:277606.78,price:209.99,ratings:7866,rating:4.6,date:"2013-01-04",days:4935},
+{r:20,img:"https://images-na.ssl-images-amazon.com/images/I/7121ifTGsdL._AC_US200_.jpg",asin:"B09QT8Z7LH",brand:"Ingenuity",units:1151,revenue:89766.484,price:89.99,ratings:18832,rating:4.4,date:"2022-01-21",days:1631},
+{r:21,img:"https://images-na.ssl-images-amazon.com/images/I/61mMPYaE4gL._AC_US200_.jpg",asin:"B0C4YRR7Z2",brand:"YEAOI",units:1074,revenue:12877.26,price:11.99,ratings:684,rating:4.6,date:"2023-05-22",days:1145},
+{r:22,img:"https://images-na.ssl-images-amazon.com/images/I/51GPVUzZMeL._AC_US200_.jpg",asin:"B0C7K87BXV",brand:"CONMDEX",units:969,revenue:9195.81,price:9.99,ratings:596,rating:4.4,date:"2023-06-09",days:1127},
+{r:23,img:"https://images-na.ssl-images-amazon.com/images/I/71N0YkV1I9L._AC_US200_.jpg",asin:"B0FJJ8625B",brand:"UPPAbaby",units:864,revenue:259191.34,price:299.99,ratings:192,rating:4.4,date:"2025-09-17",days:296},
+{r:24,img:"https://images-na.ssl-images-amazon.com/images/I/71XT52VhfAL._AC_US200_.jpg",asin:"B00E3RKC36",brand:"Ingenuity",units:859,revenue:60121.406,price:69.99,ratings:13381,rating:4.5,date:"2013-09-09",days:4687},
+{r:25,img:"https://images-na.ssl-images-amazon.com/images/I/61rhD7cgMVL._AC_US200_.jpg",asin:"B0F8T8Q83V",brand:"Tiny Marvels",units:851,revenue:45945.492,price:53.99,ratings:336,rating:4.0,date:"2025-06-17",days:388},
+{r:26,img:"https://images-na.ssl-images-amazon.com/images/I/71Pr65z3TeL._AC_US200_.jpg",asin:"B0D1R5S52V",brand:"Momcozy",units:829,revenue:152527.72,price:183.99,ratings:93,rating:4.4,date:"2024-04-24",days:807},
+{r:27,img:"https://images-na.ssl-images-amazon.com/images/I/71SrQLRDx1L._AC_US200_.jpg",asin:"B0FPD1YKK5",brand:"Viriwebaby",units:755,revenue:75492.445,price:99.99,ratings:219,rating:4.3,date:"2025-11-20",days:232},
+{r:28,img:"https://images-na.ssl-images-amazon.com/images/I/71k-F3pBFeL._AC_US200_.jpg",asin:"B08G59WRYD",brand:"Jool Baby",units:741,revenue:110409.0,price:149.0,ratings:4342,rating:4.5,date:"2024-08-29",days:680},
+{r:29,img:"https://images-na.ssl-images-amazon.com/images/I/51I4CYMiRtL._AC_US200_.jpg",asin:"B0CYHK65L1",brand:"CSDWELL",units:729,revenue:10169.55,price:13.95,ratings:392,rating:4.8,date:"2024-03-27",days:835},
+{r:30,img:"https://images-na.ssl-images-amazon.com/images/I/71YmFKq-O6L._AC_US200_.jpg",asin:"B0FF39ZB6V",brand:"Feitiong",units:720,revenue:57592.797,price:79.99,ratings:252,rating:4.5,date:"2025-07-07",days:368},
+{r:31,img:"https://images-na.ssl-images-amazon.com/images/I/71zjH9ECn0L._AC_US200_.jpg",asin:"B0G3537HS8",brand:"FasonBaby",units:688,revenue:82553.12,price:119.99,ratings:202,rating:4.6,date:"2025-12-12",days:210},
+{r:32,img:"https://images-na.ssl-images-amazon.com/images/I/71sq9dz8+uL._AC_US200_.jpg",asin:"B0FF3B983L",brand:"Feitiong",units:674,revenue:60653.258,price:89.99,ratings:185,rating:4.5,date:"2025-07-07",days:368},
+{r:33,img:"https://images-na.ssl-images-amazon.com/images/I/61OCC44iKQL._AC_US200_.jpg",asin:"B0GK12TG28",brand:"GROWNSY",units:505,revenue:75744.95,price:149.99,ratings:35,rating:4.7,date:"2026-04-24",days:77},
+{r:34,img:"https://images-na.ssl-images-amazon.com/images/I/91rhNkX1amL._AC_US200_.jpg",asin:"B08HQMBVC7",brand:"Cateam",units:505,revenue:24992.451,price:49.49,ratings:1349,rating:4.7,date:"2020-09-11",days:2128},
+{r:35,img:"https://images-na.ssl-images-amazon.com/images/I/61k3oTR6Q4L._AC_US200_.jpg",asin:"B0FPCMWBT3",brand:"Uuoeebb",units:492,revenue:44275.08,price:89.99,ratings:123,rating:4.4,date:"2025-11-13",days:239},
+{r:36,img:"https://images-na.ssl-images-amazon.com/images/I/61lHdB1w3jL._AC_US200_.jpg",asin:"B0DKBPMCBN",brand:"AOBOTE",units:488,revenue:17563.121,price:35.99,ratings:249,rating:4.6,date:"2024-12-12",days:575},
+{r:37,img:"https://images-na.ssl-images-amazon.com/images/I/61MCwbOBq+L._AC_US200_.jpg",asin:"B099DVB529",brand:"Duomilee",units:484,revenue:30487.16,price:62.99,ratings:1092,rating:4.2,date:"2022-06-12",days:1489},
+{r:38,img:"https://images-na.ssl-images-amazon.com/images/I/715U0Q6p52L._AC_US200_.jpg",asin:"B0CJQDNN9J",brand:"Larex",units:480,revenue:51355.2,price:106.99,ratings:488,rating:4.5,date:"2024-01-31",days:891},
+{r:39,img:"https://images-na.ssl-images-amazon.com/images/I/61v82nYYgSL._AC_US200_.jpg",asin:"B0DLKH8L94",brand:"zoicay",units:477,revenue:59143.23,price:123.99,ratings:443,rating:4.6,date:"2024-11-21",days:596},
+{r:40,img:"https://images-na.ssl-images-amazon.com/images/I/71IVHg-LlkL._AC_US200_.jpg",asin:"B000JG3UD4",brand:"Gorilla Playsets",units:473,revenue:17974.0,price:38.0,ratings:1807,rating:4.2,date:"2011-03-25",days:5586},
+{r:41,img:"https://images-na.ssl-images-amazon.com/images/I/61H+m5KnSBL._AC_US200_.jpg",asin:"B09HPJ9T6H",brand:"Uuoeebb",units:462,revenue:41570.76,price:89.98,ratings:41,rating:4.2,date:"2026-03-27",days:105},
+{r:42,img:"https://images-na.ssl-images-amazon.com/images/I/71Ia3uK1bAL._AC_US200_.jpg",asin:"B0BLHQ6GB5",brand:"BabyBond",units:459,revenue:55075.41,price:119.99,ratings:1134,rating:4.4,date:"2022-11-22",days:1326},
+{r:43,img:"https://images-na.ssl-images-amazon.com/images/I/61UD9WaVbHL._AC_US200_.jpg",asin:"B0FVDR1XNC",brand:"zoicay",units:446,revenue:29654.54,price:74.99,ratings:245,rating:4.3,date:"2025-10-29",days:254},
+{r:44,img:"https://images-na.ssl-images-amazon.com/images/I/71K2vI4xsvL._AC_US200_.jpg",asin:"B0G1GZQ3C7",brand:"Viriwebaby",units:442,revenue:35355.58,price:79.99,ratings:64,rating:4.2,date:"2025-12-22",days:200},
+{r:45,img:"https://images-na.ssl-images-amazon.com/images/I/61ETPyIjj9L._AC_US200_.jpg",asin:"B0BDRJHRDV",brand:"Graco",units:433,revenue:115173.664,price:265.99,ratings:363,rating:4.3,date:"2023-03-16",days:1212},
+{r:46,img:"https://images-na.ssl-images-amazon.com/images/I/71L9YkGYiUL._AC_US200_.jpg",asin:"B0GQ9RHDXL",brand:"Wnttmt",units:426,revenue:38335.74,price:89.99,ratings:39,rating:4.2,date:"2026-03-08",days:124},
+{r:47,img:"https://images-na.ssl-images-amazon.com/images/I/71RcKs6xGRL._AC_US200_.jpg",asin:"B07YKKC9K5",brand:"RedSwing",units:426,revenue:16183.74,price:37.99,ratings:1725,rating:4.3,date:"2019-11-20",days:2424},
+{r:48,img:"https://images-na.ssl-images-amazon.com/images/I/612KnRAkf9L._AC_US200_.jpg",asin:"B0FV7V7Y2B",brand:"suihuooo",units:399,revenue:35906.008,price:89.99,ratings:82,rating:4.5,date:"2025-11-13",days:239},
+{r:49,img:"https://images-na.ssl-images-amazon.com/images/I/71yNqntj4-L._AC_US200_.jpg",asin:"B08K2WNKJQ",brand:"Graco",units:385,revenue:69296.15,price:179.99,ratings:1483,rating:4.7,date:"2020-12-20",days:2028},
+{r:50,img:"https://images-na.ssl-images-amazon.com/images/I/61qnTK2oFAL._AC_US200_.jpg",asin:"B0DK35NH4B",brand:"Monniebaby",units:373,revenue:20511.271,price:54.99,ratings:247,rating:4.2,date:"2025-02-14",days:511},
+];
+
+const salesTrendData = {};
+function sparklineSVG(points){
+  const padX=8,topPad=16,bottomPad=16,barW=30,gap=8;
+  const vals = points.map(p=>p[1]==null?0:p[1]);
+  const max = Math.max.apply(null, vals.concat([1]));
+  const n = points.length;
+  const w = padX*2 + n*barW + Math.max(0,n-1)*gap;
+  const h=72;
+  const chartH = h-topPad-bottomPad;
+  const baseline = h-bottomPad;
+  let bars='', vlabels='', mlabels='';
+  for(let i=0;i<n;i++){
+    const v = vals[i];
+    const bh = max>0 ? (v/max)*chartH : 0;
+    const x = padX+i*(barW+gap);
+    const y = baseline-bh;
+    bars += '<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+barW.toFixed(1)+'" height="'+Math.max(bh,0.5).toFixed(1)+'" rx="1.5" fill="#2f6fed"/>';
+    vlabels += '<text x="'+(x+barW/2).toFixed(1)+'" y="'+(y-3).toFixed(1)+'" font-size="8" text-anchor="middle" fill="#334155">'+v.toLocaleString()+'</text>';
+    mlabels += '<text x="'+(x+barW/2).toFixed(1)+'" y="'+(h-3).toFixed(1)+'" font-size="7.5" text-anchor="middle" fill="#94a3b8">20'+points[i][0]+'</text>';
+  }
+  return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'" class="trend-spark">'
+    + '<line x1="'+padX+'" y1="'+baseline+'" x2="'+(w-padX)+'" y2="'+baseline+'" stroke="#e2e8f0" stroke-width="1"/>'
+    + bars + vlabels + mlabels
+    + '</svg>';
+}
+function trendRowHTML(asin){
+  const points = salesTrendData[asin];
+  if(!points || !points.length) return '<div class="trend-empty">暂无月度销量趋势数据（新上架或数据未覆盖）</div>';
+  return '<div class="trend-wrap"><span class="trend-label">近'+points.length+'个月销量趋势</span>'
+    + sparklineSVG(points) + '</div>';
+}
+
+const tbody = document.getElementById('top20body');
+top20.forEach(p=>{
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td class="rank">${p.r}</td>
+    <td><img class="prod-img" src="${p.img}" loading="lazy" onerror="this.style.opacity=0.2"></td>
+    <td><a href="https://www.amazon.com/dp/${p.asin}" target="_blank" rel="noopener">${p.asin}</a></td>
+    <td>${p.brand}</td>
+    <td>${p.units.toLocaleString()}</td>
+    <td>$${p.revenue.toLocaleString(undefined,{maximumFractionDigits:0})}</td>
+    <td>$${p.price}</td>
+    <td>${p.ratings.toLocaleString()}</td>
+    <td>${p.rating} ★</td>
+    <td>${p.date}</td>
+    <td>${p.days}</td>`;
+  tbody.appendChild(tr);
+  const tr2 = document.createElement('tr');
+  tr2.className = 'trend-row';
+  tr2.innerHTML = `<td colspan="11">${trendRowHTML(p.asin)}</td>`;
+  tbody.appendChild(tr2);
+});
+
+// ---- 新品榜 Top20（近6个月内上架，按月销量排序；已按独立ASIN去重，排除同款变体重复计数）----
+const newProducts10 = [
+{r:1,img:"https://images-na.ssl-images-amazon.com/images/I/61OCC44iKQL._AC_US200_.jpg",asin:"B0GK12TG28",brand:"GROWNSY",units:505,revenue:75744.95,price:149.99,ratings:35,rating:4.7,date:"2026-04-24",days:77},
+{r:2,img:"https://images-na.ssl-images-amazon.com/images/I/61H+m5KnSBL._AC_US200_.jpg",asin:"B09HPJ9T6H",brand:"Uuoeebb",units:462,revenue:41570.76,price:89.98,ratings:41,rating:4.2,date:"2026-03-27",days:105},
+{r:3,img:"https://images-na.ssl-images-amazon.com/images/I/71L9YkGYiUL._AC_US200_.jpg",asin:"B0GQ9RHDXL",brand:"Wnttmt",units:426,revenue:38335.74,price:89.99,ratings:39,rating:4.2,date:"2026-03-08",days:124},
+{r:4,img:"https://images-na.ssl-images-amazon.com/images/I/71mk0n0aGuL._AC_US200_.jpg",asin:"B0GM6F5M3P",brand:"TinyGlow",units:353,revenue:45886.473,price:129.99,ratings:27,rating:4.5,date:"2026-03-07",days:125},
+{r:5,img:"https://images-na.ssl-images-amazon.com/images/I/71NvicAE1CL._AC_US200_.jpg",asin:"B0G2BMXCWR",brand:"TimChic",units:324,revenue:31100.76,price:95.99,ratings:49,rating:4.6,date:"2026-01-13",days:178},
+{r:6,img:"https://images-na.ssl-images-amazon.com/images/I/61+5v3kFdrL._AC_US200_.jpg",asin:"B0GH77LBJ6",brand:"Pamo babe",units:307,revenue:39906.934,price:129.99,ratings:18,rating:4.8,date:"2026-06-01",days:39},
+{r:7,img:"https://images-na.ssl-images-amazon.com/images/I/61cVnVKE74L._AC_US200_.jpg",asin:"B0GSCZ18X7",brand:"suihuooo",units:251,revenue:22587.49,price:89.99,ratings:35,rating:4.5,date:"2026-04-03",days:98},
+{r:8,img:"https://m.media-amazon.com/images/I/412C1ZjDlDL._SS200_.jpg",asin:"B0GT8ZBXX1",brand:"Enborbabe",units:154,revenue:8468.46,price:54.99,ratings:16,rating:4.3,date:"2026-04-20",days:81},
+{r:9,img:"https://m.media-amazon.com/images/I/41DEUEXRHEL._SS200_.jpg",asin:"B0F52H13TY",brand:"KIDINIX",units:151,revenue:10470.34,price:69.34,ratings:14,rating:4.3,date:"2026-04-24",days:77},
+{r:10,img:"https://m.media-amazon.com/images/I/31BkNJLy0xL._AC_US200_.jpg",asin:"B0G7H1W55P",brand:"HARPPA",units:122,revenue:19518.781,price:159.99,ratings:47,rating:4.2,date:"2026-01-10",days:181},
+{r:11,img:"https://images-na.ssl-images-amazon.com/images/I/616J+FkWZBL._AC_US200_.jpg",asin:"B0FJ7ZMX9C",brand:"JFOVMCYG",units:100,revenue:10498.0,price:104.98,ratings:22,rating:4.4,date:"2026-04-13",days:88},
+{r:12,img:"https://m.media-amazon.com/images/I/41WcH27hyUL._SS200_.jpg",asin:"B0FJ7Z6MXJ",brand:"JFOVMCYG",units:100,revenue:10998.0,price:109.98,ratings:28,rating:4.4,date:"2026-04-15",days:86},
+{r:13,img:"https://m.media-amazon.com/images/I/316kwM5UG2L._SS200_.jpg",asin:"B0G7HJ7BSL",brand:"HARPPA",units:95,revenue:18999.05,price:199.99,ratings:2,rating:5.0,date:"2026-02-03",days:157},
+{r:14,img:"https://images-na.ssl-images-amazon.com/images/I/719qxoDqfhL._AC_US200_.jpg",asin:"B0FX2YVBFZ",brand:"Smelluck",units:75,revenue:9749.25,price:129.99,ratings:14,rating:4.6,date:"2026-03-01",days:131},
+{r:15,img:"https://m.media-amazon.com/images/I/41oWMg6l1sL._SS200_.jpg",asin:"B0DHJ4MM6G",brand:"harhoers",units:64,revenue:4255.36,price:66.49,ratings:32,rating:4.2,date:"2026-03-07",days:125},
+{r:16,img:"https://images-na.ssl-images-amazon.com/images/I/714I+vMy5FL._AC_US200_.jpg",asin:"B0GLZZJJJS",brand:"HARPPA",units:62,revenue:7439.38,price:119.99,ratings:18,rating:4.6,date:"2026-02-27",days:133},
+{r:17,img:"https://images-na.ssl-images-amazon.com/images/I/71F5KqdPciL._AC_US200_.jpg",asin:"B0G8W9L6VX",brand:"GAEZAP",units:35,revenue:3326.05,price:95.03,ratings:52,rating:4.3,date:"2026-01-13",days:178},
+{r:18,img:"https://m.media-amazon.com/images/I/41f394Yi5ZL._AC_US200_.jpg",asin:"B0GQRD8RVQ",brand:"Fashionsmile",units:19,revenue:1519.8099,price:79.99,ratings:6,rating:4.8,date:"2026-04-08",days:93},
+{r:19,img:"https://m.media-amazon.com/images/I/41f8MLAv7gL._AC_US200_.jpg",asin:"B0H2YXTTVX",brand:"AMKE",units:18,revenue:1079.8201,price:59.99,ratings:1,rating:5.0,date:"2026-05-30",days:41},
+{r:20,img:"https://m.media-amazon.com/images/I/41Wi5g+jNyL._SS200_.jpg",asin:"B0GSVT29SY",brand:"cutebeams",units:14,revenue:2379.86,price:169.99,ratings:2,rating:5.0,date:"2026-05-17",days:54},
+];
+const newProdBody = document.getElementById('newProdBody');
+newProducts10.forEach(p=>{
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td class="rank">${p.r}</td>
+    <td><img class="prod-img" src="${p.img}" loading="lazy" onerror="this.style.opacity=0.2"></td>
+    <td><a href="https://www.amazon.com/dp/${p.asin}" target="_blank" rel="noopener">${p.asin}</a></td>
+    <td>${p.brand}</td>
+    <td>${p.units.toLocaleString()}</td>
+    <td>$${p.revenue.toLocaleString(undefined,{maximumFractionDigits:0})}</td>
+    <td>$${p.price}</td>
+    <td>${p.ratings.toLocaleString()}</td>
+    <td>${p.rating} ★</td>
+    <td>${p.date}</td>
+    <td>${p.days}</td>`;
+  newProdBody.appendChild(tr);
+});
+
+// ---- 新品榜 Top20 卖点/痛点 + 真实买家评价摘录（原文取自 SellerSprite 评论接口，逐字摘录）----
+const newSellingPain = [
+{asin:"B0GK12TG28", model:"GROWNSY Dual Motion Baby Swing", points:["双向摇摆(侧摆+前后摆)","270°座椅旋转","5档速度+内置音乐"],
+  pain:null, painNote:"上架77天，35条评分中暂无可采集的文字评论样本，口碑有待进一步验证。"},
+{asin:"B09HPJ9T6H", model:"Uuoeebb Electric Portable Baby Swing", points:["蓝牙音乐","3档定时器","遥控器远程控制"],
+  pain:{author:"Samantha nicolle", verified:true, star:1, date:"2026-06-09", title:"No funciona",
+    text:"No lo compren rápido se le termina la velocidad solo dura 30 segundos y se apaga hay que volverlo a encender la verdad para el precio no vale la pena. (西语原文，大意：速度很快就没了，只持续30秒就自动关闭，需要重新开机，这个价钱不值。)"}},
+{asin:"B0GQ9RHDXL", model:"Wnttmt Electric Infant Swing", points:["5档速度模式","5点式安全带","黑色现代设计"],
+  pain:null, painNote:"上架约130天，39条评分中暂无可采集的文字评论样本。"},
+{asin:"B0GM6F5M3P", model:"TinyGlow Electric Baby Swing", points:["触控面板+遥控器","仿木质底座设计","5种摆动模式+10首歌曲"],
+  pain:{author:"Gee Gee", verified:false, star:4, date:"2026-06-04", title:"Easy Assembly and Helpful Features",
+    text:"I had trouble using the included screwdriver to drive the screws through once I believed I had lined everything up... The seat lining is soft, plush, and comfortable, but it can also get warm... I would have liked an easier way to remove or adjust the plush insert during hotter weather."}},
+{asin:"B0G2BMXCWR", model:"TimChic Portable Infant Swing", points:["5档速度","3档高度可调","12首预设旋律"],
+  pain:null, painNote:"本次抓取的10条评论均为5星好评（含Vine测评），暂未采集到可摘录的负面文字评论。"},
+{asin:"B0GH77LBJ6", model:"Pamo Babe Portable Baby Swing (Cry Detection)", points:["哭声感应自动安抚","蓝牙音乐+遥控","可调节靠背"],
+  pain:{author:"Real_World_Customer", verified:false, star:4, date:"2026-02-04", title:"Really nice portable baby swing.",
+    text:"The cry detection works really well except when the bird squawks, it starts. We actually use a car jump starter battery pack that has USB ports on it to power when there is no outlet available."}},
+{asin:"B0GSCZ18X7", model:"suihuooo Infant Swing", points:["5档摆动速度","内置安抚旋律","5点式安全带"],
+  pain:null, painNote:"上架约120天，35条评分中暂无可采集的文字评论样本。"},
+{asin:"B0GT8ZBXX1", model:"Enborbabe Portable Baby Swing", points:["5档速度","定时器功能","0-9个月/20磅承重"],
+  pain:null, painNote:"上架约60天，16条评分中暂无可采集的文字评论样本。"},
+{asin:"B0F52H13TY", model:"KIDINIX Bluetooth Baby Swing", points:["蓝牙音乐音箱","3档座椅位置","3档速度"],
+  pain:null, painNote:"上架77天，14条评分中暂无可采集的文字评论样本。"},
+{asin:"B0G7H1W55P", model:"HARPPA Weddell Signature Baby Electric Swing", points:["180°旋转+双模式摆动","5点式安全带","遥控器控制"],
+  pain:null, painNote:"上架约185天，47条评分中暂无可采集的文字评论样本。"},
+];
+const newPainGrid = document.getElementById('newProdPainGrid');
+newSellingPain.forEach((sp,i)=>{
+  const prod = newProducts10.find(p=>p.asin===sp.asin) || {};
+  const stars = sp.pain ? '★'.repeat(sp.pain.star) + '☆'.repeat(5-sp.pain.star) : '';
+  const reviewHtml = sp.pain ? `
+    <div class="review-quote">
+      <span class="rq-label">真实买家差评摘录</span>
+      <div class="rq-top">
+        <span class="stars">${stars}</span>
+        <span class="${sp.pain.verified? 'vbadge':'unverified'}">${sp.pain.verified? 'Verified Purchase':'未标记Verified'}</span>
+        <span class="rq-author">${sp.pain.author}</span>
+        <span class="rq-date">${sp.pain.date}</span>
+      </div>
+      <div class="rq-title">"${sp.pain.title}"</div>
+      <div class="rq-text">${sp.pain.text}</div>
+    </div>` : `<div class="review-quote empty">${sp.painNote}</div>`;
+  const card = document.createElement('div');
+  card.className = 'prod-card';
+  card.innerHTML = `
+    <div class="prod-head">
+      <img src="${prod.img||''}" loading="lazy" onerror="this.style.opacity=0.2">
+      <div>
+        <h5>#${i+1} ${sp.model}</h5>
+        <div class="meta"><a href="https://www.amazon.com/dp/${sp.asin}" target="_blank" rel="noopener">${sp.asin}</a> · ${prod.brand||''}</div>
+        <div class="sp-tags">${sp.points.map(p=>`<span>${p}</span>`).join('')}</div>
+      </div>
+    </div>
+    ${reviewHtml}
+  `;
+  newPainGrid.appendChild(card);
+});
+
+// ---- Top20 卖点/痛点 + 真实买家评价摘录（原文取自 SellerSprite 评论接口，逐字摘录）----
+const sellingPain = [
+{asin:"B09MWJDC6C", model:"Graco Slim Spaces Compact Baby Swing", points:["空间节省可折叠设计","高度可调节支腿","内置玩具杆+软玩具"],
+  pain:{author:"RT", verified:true, star:4, date:"2026-02-11", title:"Great baby swing",
+    text:"Great swing! Only downfall is that it takes batteries instead of being plugged in but great to easily move from room to room"}},
+{asin:"B09BG3TCBL", model:"Swurfer Coconut Toddler Swing", points:["户外可挂式秋千","3点式可调安全带","防夹绳设计"],
+  pain:{author:"Melanie", verified:true, star:1, date:"2024-03-19", title:"Too thin of plastic",
+    text:"Broke within the first month, I'm going to guess the wind broke it. Super thin plastic, the idea and fit was great, but not durable at all."}},
+{asin:"B0D65F9NS7", model:"Monamii Bluetooth Baby Swing", points:["蓝牙音乐音箱","5档速度+遥控器","室内外两用"],
+  pain:{author:"May", verified:true, star:1, date:"2026-06-15", title:"Unsafe for newborn",
+    text:"I started using it when my daughter was around 2 months old, and I noticed the design positioned her in a way that made her chin rest too close to her chest, which felt unsafe for a newborn... she seemed like she needed to spit up and almost choked because of the position."}},
+{asin:"B09MWHHV11", model:"Graco Simple Sway Baby Swing", points:["左右摇摆模式","6档速度+振动","可拆卸摇篮"],
+  pain:{author:"Christina", verified:true, star:1, date:"2026-02-04", title:"Don't waste your money",
+    text:"Swing started off good and after 9 months it completely stopped working. Changed batteries tried plugging it in and nothing just makes a weird noise. What a waste."}},
+{asin:"B0BTDRL37K", model:"Bright Starts Playful Paradise", points:["自动电动摇摆","内置音乐","便携易折叠"],
+  pain:{author:"John Blanton", verified:true, star:1, date:"2026-02-18", title:"Don't waste your money.",
+    text:"This is junk. Only used it about 6 times and it's only doing this with brand new batteries and on high. Don't waste your money."}},
+{asin:"B01DGIKD68", model:"Little Tikes Snug 'n Secure Swing", points:["2合1秋千+安全带可调","经典入门低价款","类目最早上架款之一(2013年)"],
+  pain:null, painNote:"该ASIN评论区抓样本以5星好评为主（本次抓取10条中9条5星、1条4星），暂未采集到可摘录的负面文字评论。"},
+{asin:"B095L52T3Z", model:"Graco DuetConnect LX Swing and Bouncer", points:["秋千+弹跳椅2合1","多方向摇摆","独立可拆卸弹跳座"],
+  pain:{author:"Mia B", verified:true, star:1, date:"2026-06-14", title:"Don't buy it",
+    text:"- the chair doesn't have a battery option you always have to keep it plugged.<br>- The chair leg will come off easily so you always have to check if the chair is attached to the leg or no before you put ur baby!"}},
+{asin:"B0CT5K6DJG", model:"RIVIPLOU Electric Baby Swing", points:["5种自然摆动模式","可拆卸遥控","高性价比"],
+  pain:{author:"Rochelle Smith", verified:true, star:1, date:"2026-06-25", title:"Don't waste your money!",
+    text:"It'll turn on, but you can't turn it off. You can't change any of the settings on the top and all it does is just throws error codes constantly. It'll swing in a circle but that's it and it's really loud and racketey, like something's broken inside."}},
+{asin:"B0DK5KKWKT", model:"Momcozy 2-in-1 Electric Baby Swing", points:["双臂支撑系统","触控面板操作","可转换婴儿床边摇篮"],
+  pain:{author:"Heather Napoles", verified:true, star:3, date:"2026-06-09", title:"Cute baby swing",
+    text:"The downfall is the touch screen. It's a nightmare trying to turn it on or off when you have a screaming baby. I feel the way about all momcozy touch screens. They need to make them more sensitive."}},
+{asin:"B0FH6Q7T6B", model:"Momcozy 2-in-1 Electric Baby Swing（同系列款）", points:["双臂支撑系统","触控面板操作","可转换婴儿床边摇篮"],
+  pain:null, painNote:"该ASIN为Momcozy同系列另一配色/款式，本次调研未单独抓取其评论文本，产品功能与上一款一致，可参考同品牌B0DK5KKWKT的反馈。"},
+];
+const painGrid = document.getElementById('prodPainGrid');
+sellingPain.forEach((sp,i)=>{
+  const prod = top20.find(p=>p.asin===sp.asin) || {};
+  const stars = sp.pain ? '★'.repeat(sp.pain.star) + '☆'.repeat(5-sp.pain.star) : '';
+  const reviewHtml = sp.pain ? `
+    <div class="review-quote">
+      <span class="rq-label">真实买家差评摘录</span>
+      <div class="rq-top">
+        <span class="stars">${stars}</span>
+        <span class="${sp.pain.verified? 'vbadge':'unverified'}">${sp.pain.verified? 'Verified Purchase':'未标记Verified'}</span>
+        <span class="rq-author">${sp.pain.author}</span>
+        <span class="rq-date">${sp.pain.date}</span>
+      </div>
+      <div class="rq-title">"${sp.pain.title}"</div>
+      <div class="rq-text">${sp.pain.text}</div>
+    </div>` : `<div class="review-quote empty">${sp.painNote}</div>`;
+  const card = document.createElement('div');
+  card.className = 'prod-card';
+  card.innerHTML = `
+    <div class="prod-head">
+      <img src="${prod.img||''}" loading="lazy" onerror="this.style.opacity=0.2">
+      <div>
+        <h5>#${i+1} ${sp.model}</h5>
+        <div class="meta"><a href="https://www.amazon.com/dp/${sp.asin}" target="_blank" rel="noopener">${sp.asin}</a> · ${prod.brand||''}</div>
+        <div class="sp-tags">${sp.points.map(p=>`<span>${p}</span>`).join('')}</div>
+      </div>
+    </div>
+    ${reviewHtml}
+  `;
+  painGrid.appendChild(card);
+});
+
+Chart.defaults.font.family = "Segoe UI, PingFang SC, Microsoft YaHei, Arial, sans-serif";
+Chart.defaults.color = "#4b5563";
+
+// Google Trend
+new Chart(document.getElementById('trendChart'), {
+  type:'line',
+  data:{
+    labels:["2021-06", "2021-07", "2021-08", "2021-09", "2021-10", "2021-11", "2021-12", "2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"],
+    datasets:[{
+      label:'Google 搜索热度指数',
+      data:[28, 47, 46, 45, 43, 48, 42, 47, 51, 52, 47, 46, 48, 48, 53, 43, 41, 43, 40, 47, 46, 49, 52, 49, 49, 49, 42, 41, 40, 45, 42, 44, 44, 49, 47, 47, 46, 48, 41, 40, 42, 41, 38, 42, 42, 46, 43, 45, 44, 47, 45, 41, 41, 46, 43, 44, 47, 61, 93, 77, 38],
+      borderColor:'#2f6fed', backgroundColor:'rgba(47,111,237,0.12)',
+      fill:true, tension:0.35, pointRadius:0, borderWidth:2.5
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{ x:{ticks:{maxTicksLimit:12}}, y:{beginAtZero:true, title:{display:true,text:'指数(0-100)'}} }
+  }
+});
+
+// Price distribution
+new Chart(document.getElementById('priceChart'), {
+  type:'bar',
+  data:{
+    labels:['$0-25','$25-50','$50-75','$75-100','$100-125','$125-150','$150-175','$175+'],
+    datasets:[
+      {label:'商品数', data:[9,14,15,24,10,10,3,15], backgroundColor:'#93b6f7', yAxisID:'y'},
+      {label:'销量占比(%)', data:[4.14,20.54,5.59,15.68,14.03,25.94,0.55,13.52], backgroundColor:'#ff8a5b', yAxisID:'y1', type:'line', tension:.3, pointRadius:3}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    scales:{
+      y:{position:'left', title:{display:true,text:'商品数'}},
+      y1:{position:'right', grid:{drawOnChartArea:false}, title:{display:true,text:'销量占比(%)'}}
+    }
+  }
+});
+
+// Rating distribution
+new Chart(document.getElementById('ratingChart'), {
+  type:'bar',
+  data:{
+    labels:['<2.0','2.0-3.0','3.0-3.5','3.5-4.0','4.0-4.3','4.3-4.5','4.5+'],
+    datasets:[{label:'销量占比(%)', data:[0,0,0.14,1.89,10.17,49.25,38.54], backgroundColor:'#2f6fed'}]
+  },
+  options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, indexAxis:'y'}
+});
+
+// Ratings count distribution
+new Chart(document.getElementById('ratingsCountChart'), {
+  type:'bar',
+  data:{
+    labels:['无评论','1-50','50-100','100-200','200-300','300-500','500+'],
+    datasets:[{label:'销量占比(%)', data:[0,4.70,2.85,5.14,8.38,11.86,67.08], backgroundColor:'#ff8a5b'}]
+  },
+  options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, indexAxis:'y'}
+});
+
+// Listing date distribution
+new Chart(document.getElementById('listingDateChart'), {
+  type:'bar',
+  data:{
+    labels:['1个月','3个月','半年','1年','1年半','2年','2年半','3年','3年以上'],
+    datasets:[{label:'销量占比(%)', data:[0,1.35,2.14,12.04,13.49,3.13,13.55,2.28,52.03], backgroundColor:'#2f6fed'}]
+  },
+  options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}}
+});
+
+// Brand concentration donut
+new Chart(document.getElementById('brandChart'), {
+  type:'doughnut',
+  data:{
+    labels:['Graco','Momcozy','Swurfer','Ingenuity','Monamii','RIVIPLOU','其他(57个品牌)'],
+    datasets:[{
+      data:[41.72,14.10,3.78,8.82,11.31,5.69,14.58],
+      backgroundColor:['#2f6fed','#5b9bf5','#1d4fb8','#ff8a5b','#ffb088','#8fd3c7','#d8e0ee']
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:'bottom'}, title:{display:true,text:'销售额份额占比(%)'} }
+  }
+});
+
+// ---- 可变动利润测算器（对标卖家精灵利润测算模板） ----
+const pcFmt$ = n => (n<0?'-$':'$') + Math.abs(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+const pcFmt0 = n => (n<0?'-$':'$') + Math.abs(n).toLocaleString(undefined,{maximumFractionDigits:0});
+const pcVal = id => parseFloat(document.getElementById(id).value) || 0;
+
+// ---- 本地保存/恢复：把输入的数值存进浏览器 localStorage，刷新/重新打开这份HTML时自动带回来 ----
+const PC_STORAGE_KEY = 'babySwingsReport_profitCalc_v1';
+const PC_FIELD_IDS = ['pcPrice','pcUnits','pcCogs','pcFreight','pcOtherLog','pcTariffRate','pcImportFees',
+  'pcReferralRate','pcReferralMin','pcFba','pcStorage','pcAcos','pcOtherMkt','pcReturnRate','pcRefundFee'];
+
+function pcSave(){
+  const statusEl = document.getElementById('pcSaveStatus');
+  try{
+    const data = {};
+    PC_FIELD_IDS.forEach(id => data[id] = document.getElementById(id).value);
+    localStorage.setItem(PC_STORAGE_KEY, JSON.stringify(data));
+    if(statusEl){
+      const t = new Date().toLocaleString();
+      statusEl.textContent = '已自动保存到本机浏览器（' + t + '），下次用同一浏览器打开此文件会自动带回这些数字。';
+    }
+  }catch(e){
+    if(statusEl){
+      statusEl.textContent = '当前浏览器/打开方式不支持本地自动保存，刷新或关闭页面后输入的数字会丢失，建议截图保存或手动记录参数。';
+    }
+  }
+}
+
+function pcRestore(){
+  try{
+    const raw = localStorage.getItem(PC_STORAGE_KEY);
+    if(!raw) return;
+    const data = JSON.parse(raw);
+    PC_FIELD_IDS.forEach(id => {
+      if(data[id] !== undefined && data[id] !== '') document.getElementById(id).value = data[id];
+    });
+  }catch(e){ /* 静默失败，保持默认值 */ }
+}
+
+let pcChart = null;
+function pcInitChart(){
+  pcChart = new Chart(document.getElementById('pcChart'), {
+    type:'doughnut',
+    data:{
+      labels:['产品成本(含头程)','关税/报关杂费','平台佣金','FBA费用','仓储费','广告费','退货/其他成本','净利润'],
+      datasets:[{
+        data:[0,0,0,0,0,0,0,0],
+        backgroundColor:['#93b6f7','#7c3aed','#2f6fed','#ff8a5b','#ffb088','#f5a623','#dc2626','#16a34a']
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{position:'bottom', labels:{boxWidth:11,font:{size:10.5}}}, title:{display:true,text:'月度利润构成（占总收入%）'} }
+    }
+  });
+}
+
+function pcCalc(){
+  const price = pcVal('pcPrice'), units = pcVal('pcUnits');
+  const cogs = pcVal('pcCogs'), freight = pcVal('pcFreight'), otherLog = pcVal('pcOtherLog');
+  const tariffRate = pcVal('pcTariffRate'), importFeesRate = pcVal('pcImportFees');
+  const referralRate = pcVal('pcReferralRate'), referralMin = pcVal('pcReferralMin');
+  const fba = pcVal('pcFba'), storage = pcVal('pcStorage');
+  const acos = pcVal('pcAcos'), otherMkt = pcVal('pcOtherMkt');
+  const returnRate = pcVal('pcReturnRate'), refundFee = pcVal('pcRefundFee');
+
+  const revenue = price*units;
+  const returnLostRevenue = revenue*returnRate/100;
+  const referralPerUnit = Math.max(price*referralRate/100, referralMin);
+  const referralTotal = referralPerUnit*units;
+  const fbaTotal = fba*units;
+  const storageTotal = storage*units;
+  const cogsTotal = (cogs+freight+otherLog)*units;
+  const dutiableValuePerUnit = cogs+freight;
+  const tariffPerUnit = dutiableValuePerUnit*tariffRate/100;
+  const importFeesPerUnit = dutiableValuePerUnit*importFeesRate/100;
+  const tariffTotal = tariffPerUnit*units;
+  const importFeesTotal = importFeesPerUnit*units;
+  const tariffAndFeesTotal = tariffTotal + importFeesTotal;
+  const adTotal = revenue*acos/100;
+  const otherMktTotal = otherMkt*units;
+  const refundFeeTotal = refundFee*units*returnRate/100;
+  const otherCostLump = returnLostRevenue + refundFeeTotal + otherMktTotal;
+
+  const grossProfit = revenue - referralTotal - fbaTotal - storageTotal - cogsTotal - tariffAndFeesTotal;
+  const grossMargin = revenue>0 ? grossProfit/revenue*100 : 0;
+  const netProfit = grossProfit - adTotal - otherCostLump;
+  const netMargin = revenue>0 ? netProfit/revenue*100 : 0;
+  const perUnitProfit = units>0 ? netProfit/units : 0;
+  const totalInvestment = cogsTotal + tariffAndFeesTotal;
+  const roi = totalInvestment>0 ? netProfit/totalInvestment*100 : 0;
+  const breakEvenAcos = revenue>0 ? Math.max(0,(grossProfit - otherCostLump)/revenue*100) : 0;
+
+  const stats = document.getElementById('pcStats');
+  const box = (label, val, neg) => `<div class="stat-box"><div class="v${neg?' neg':''}">${val}</div><div class="l">${label}</div></div>`;
+  stats.innerHTML =
+    box('月总收入', pcFmt0(revenue)) +
+    box('关税+报关杂费/件', pcFmt$(tariffPerUnit+importFeesPerUnit)) +
+    box('月度关税+杂费总额', pcFmt0(tariffAndFeesTotal)) +
+    box('毛利润（扣佣金/FBA/仓储/产品成本/关税）', pcFmt0(grossProfit), grossProfit<0) +
+    box('毛利率', grossMargin.toFixed(1)+'%', grossMargin<0) +
+    box('月净利润（再扣广告/退货/其他）', pcFmt0(netProfit), netProfit<0) +
+    box('净利率', netMargin.toFixed(1)+'%', netMargin<0) +
+    box('单件净利润', pcFmt$(perUnitProfit), perUnitProfit<0) +
+    box('ROI（净利润/产品成本+关税投入）', roi.toFixed(0)+'%', roi<0) +
+    box('盈亏平衡ACOS上限', breakEvenAcos.toFixed(1)+'%', breakEvenAcos<0);
+
+  if(pcChart){
+    const denom = revenue>0 ? revenue : 1;
+    const pct = v => Math.max(v,0)/denom*100;
+    pcChart.data.datasets[0].data = [
+      pct(cogsTotal), pct(tariffAndFeesTotal), pct(referralTotal), pct(fbaTotal), pct(storageTotal),
+      pct(adTotal), pct(otherCostLump), pct(Math.max(netProfit,0))
+    ];
+    pcChart.update();
+  }
+
+  pcSave();
+}
+
+function pcReset(){
+  ['pcPrice','pcUnits','pcCogs','pcFreight','pcOtherLog','pcFba','pcStorage','pcOtherMkt','pcRefundFee'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('pcReferralRate').value = 15;
+  document.getElementById('pcReferralMin').value = 0.30;
+  document.getElementById('pcTariffRate').value = 35;
+  document.getElementById('pcImportFees').value = 0.47;
+  document.getElementById('pcAcos').value = 15;
+  document.getElementById('pcReturnRate').value = 5;
+  try{ localStorage.removeItem(PC_STORAGE_KEY); }catch(e){}
+  pcCalc();
+}
+
+pcInitChart();
+pcRestore();
+pcCalc();
+
+</script>
+</body>
+</html>
